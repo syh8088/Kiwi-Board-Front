@@ -1,0 +1,11 @@
+ /* ThemeColor One */
+.jobsearch-header-six .jobsearch-headfive-option li a,.jobsearch-banner-six .slick-arrow:hover,.jobsearch-team-parallex span,.jobsearch-blog-medium-btn {
+    color: #fb246a;
+}
+.jobsearch-header-six .jobsearch-headfive-option li.active a,.jobsearch-banner-six-caption a,.jobsearch-banner-search-six input[type="submit"],
+.jobsearch-animate-filter ul li a.is-checked,.jobsearch-services-fourtext h2:before,.jobsearch-dream-packages.active .jobsearch-dream-packagesplan {
+    background-color: #fb246a;
+}
+.jobsearch-header-six,.jobsearch-banner-six .slick-arrow:hover {
+    border-color: #fb246a;
+}
