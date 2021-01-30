@@ -1,117 +1,5 @@
 <template>
-    <body>
-
-    <!-- Wrapper -->
-    <div class="careerfy-wrapper">
-
-        <!-- Header -->
-        <header id="careerfy-header" class="careerfy-header-one">
-            <div class="container">
-                <div class="row">
-                    <aside class="col-md-2"> <a href="index.html" class="careerfy-logo"><img src="images/logo.png" alt=""></a> </aside>
-                    <aside class="col-md-6">
-                        <nav class="careerfy-navigation">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#careerfy-navbar-collapse-1" aria-expanded="false">
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                            </div>
-                            <div class="collapse navbar-collapse" id="careerfy-navbar-collapse-1">
-                                <ul class="navbar-nav">
-                                    <li class="active"><a href="index.html">Home</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="https://eyecix.com/html/careerfy/">Demo Careerfy</a></li>
-                                            <li><a href="https://eyecix.com/html/careerfy-demos/hireright-demo/">Demo Hireright</a></li>
-                                            <li><a href="https://eyecix.com/html/careerfy-demos/jobshub-demo/">Demo Jobshub</a></li>
-                                            <li><a href="https://eyecix.com/html/careerfy-demos/belovedjobs/">Demo BelovedJobs</a></li>
-                                            <li><a href="index-five.html">Demo JobsOnline</a></li>
-                                            <li><a href="index-six.html">Demo JobSearch</a></li>
-                                            <li><a href="index-seven.html">Demo JobFinder</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Pages</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="about-us.html">About Us</a></li>
-                                            <li><a href="cv-packages.html">CV Packages</a></li>
-                                            <li><a href="faq.html">Faq's</a></li>
-                                            <li><a href="job-grid-full.html">Job Grid</a></li>
-                                            <li><a href="job-grid-with-filters.html">Job Grid W/filter</a></li>
-                                            <li><a href="job-listings.html">Job Listings</a></li>
-                                            <li><a href="job-detail.html">Job Detail</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="job-detail.html">Job Detail I</a></li>
-                                                    <li><a href="job-detail-two.html">Job Detail II</a></li>
-                                                    <li><a href="job-detail-three.html">Job Detail III</a></li>
-                                                    <li><a href="job-detail-four.html">Job Detail IV</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="job-packages.html">Job Packages</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">For Candidates</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="candidate-dashboard-applied-jobs.html">Applied Jobs</a></li>
-                                            <li><a href="candidate-dashboard-changed-password.html">Changed Password</a></li>
-                                            <li><a href="candidate-dashboard-cv-manager.html">CV Manager</a></li>
-                                            <li><a href="candidate-dashboard-job-alert.html">Job Alert</a></li>
-                                            <li><a href="candidate-dashboard-profile-seting.html">Profile Setting</a></li>
-                                            <li><a href="candidate-dashboard-resume.html">Candidate Resume</a></li>
-                                            <li><a href="candidate-dashboard-saved-jobs.html">Saved Jobs</a></li>
-                                            <li><a href="candidate-listings.html">Candidate Listings</a></li>
-                                            <li><a href="candidate-grid.html">Candidate Grid</a></li>
-                                            <li><a href="candidate-detail.html">Candidate Detail</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="candidate-detail.html">Candidate Detail I</a></li>
-                                                    <li><a href="candidate-detail-two.html">Candidate Detail II</a></li>
-                                                    <li><a href="candidate-detail-three.html">Candidate Detail III</a></li>
-                                                    <li><a href="candidate-detail-four.html">Candidate Detail IV</a></li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">For Employers</a>
-                                        <ul class="sub-menu">
-                                            <li><a href="employer-list.html">Employer List</a></li>
-                                            <li><a href="employer-grid.html">Employer Grid</a></li>
-                                            <li><a href="employer-detail.html">Employer Detail</a>
-                                                <ul class="sub-menu">
-                                                    <li><a href="employer-detail.html">Employer Detail I</a></li>
-                                                    <li><a href="employer-detail-two.html">Employer Detail II</a></li>
-                                                    <li><a href="employer-detail-three.html">Employer Detail III</a></li>
-                                                    <li><a href="employer-detail-four.html">Employer Detail IV</a></li>
-                                                </ul>
-                                            </li>
-                                            <li><a href="employer-dashboard-transactions.html">Transactions</a></li>
-                                            <li><a href="employer-dashboard-resumes.html">Employer Resumes</a></li>
-                                            <li><a href="employer-dashboard-profile-seting.html">Profile Setting</a></li>
-                                            <li><a href="employer-dashboard-pkgpayment.html">Package Payment</a></li>
-                                            <li><a href="employer-dashboard-packages.html">Packages</a></li>
-                                            <li><a href="employer-dashboard-newjob.html">Employer New Job</a></li>
-                                            <li><a href="employer-dashboard-manage-jobs.html">Menage Jobs</a></li>
-                                            <li><a href="employer-dashboard-confitmation.html">Employer Confitmation</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="contact-us.html">Contact</a></li>
-                                </ul>
-                            </div>
-                        </nav>
-                    </aside>
-                    <aside class="col-md-4">
-                        <div class="careerfy-right">
-                            <ul class="careerfy-user-section">
-                                <li><a class="careerfy-color careerfy-open-signin-tab" href="#">Register</a></li>
-                                <li><a class="careerfy-color careerfy-open-signup-tab" href="#">Sign in</a></li>
-                            </ul>
-                            <a href="#" class="careerfy-simple-btn careerfy-bgcolor"><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>
-                        </div>
-                    </aside>
-                </div>
-            </div>
-        </header>
-        <!-- Header -->
-
+    <div>
         <!-- Banner -->
         <div class="careerfy-banner careerfy-typo-wrap">
             <span class="careerfy-banner-transparent"></span>
@@ -260,7 +148,7 @@
                                 <a href="#" class="careerfy-static-btn careerfy-bgcolor"><span>Search Jobs</span></a>
                             </div>
                         </aside>
-                        <aside class="col-md-6 careerfy-typo-wrap"> <div class="careerfy-right"><img src="extra-images/parallex-thumb-1.png" alt=""></div> </aside>
+                        <aside class="col-md-6 careerfy-typo-wrap"> <div class="careerfy-right"><img src="~/static/img/extra-images/parallex-thumb-1.png" alt=""></div> </aside>
 
                     </div>
                 </div>
@@ -284,7 +172,7 @@
                                     <li class="careerfy-column-6">
                                         <div class="careerfy-table-layer">
                                             <div class="careerfy-table-row">
-                                                <figure><a href="#"><img src="extra-images/featured-listing-1.jpg" alt=""></a></figure>
+                                                <figure><a href="#"><img src="~/static/img/extra-images/featured-listing-1.jpg" alt=""></a></figure>
                                                 <div class="careerfy-featured-listing-text">
                                                     <h2><a href="#">Dropbox -- UX designer</a></h2>
                                                     <a href="#" class="careerfy-like-list"><i class="careerfy-icon careerfy-heart"></i></a>
@@ -303,7 +191,7 @@
                                     <li class="careerfy-column-6">
                                         <div class="careerfy-table-layer">
                                             <div class="careerfy-table-row">
-                                                <figure><a href="#"><img src="extra-images/featured-listing-2.jpg" alt=""></a></figure>
+                                                <figure><a href="#"><img src="~/static/img/extra-images/featured-listing-2.jpg" alt=""></a></figure>
                                                 <div class="careerfy-featured-listing-text">
                                                     <h2><a href="#">Dropbox -- UX designer</a></h2>
                                                     <a href="#" class="careerfy-like-list"><i class="careerfy-icon careerfy-heart"></i></a>
@@ -322,7 +210,7 @@
                                     <li class="careerfy-column-6">
                                         <div class="careerfy-table-layer">
                                             <div class="careerfy-table-row">
-                                                <figure><a href="#"><img src="extra-images/featured-listing-3.jpg" alt=""></a></figure>
+                                                <figure><a href="#"><img src="~/static/img/extra-images/featured-listing-3.jpg" alt=""></a></figure>
                                                 <div class="careerfy-featured-listing-text">
                                                     <h2><a href="#">Dropbox -- UX designer</a></h2>
                                                     <a href="#" class="careerfy-like-list"><i class="careerfy-icon careerfy-heart"></i></a>
@@ -341,7 +229,7 @@
                                     <li class="careerfy-column-6">
                                         <div class="careerfy-table-layer">
                                             <div class="careerfy-table-row">
-                                                <figure><a href="#"><img src="extra-images/featured-listing-4.jpg" alt=""></a></figure>
+                                                <figure><a href="#"><img src="~/static/img/extra-images/featured-listing-4.jpg" alt=""></a></figure>
                                                 <div class="careerfy-featured-listing-text">
                                                     <h2><a href="#">Dropbox -- UX designer</a></h2>
                                                     <a href="#" class="careerfy-like-list"><i class="careerfy-icon careerfy-heart"></i></a>
@@ -360,7 +248,7 @@
                                     <li class="careerfy-column-6">
                                         <div class="careerfy-table-layer">
                                             <div class="careerfy-table-row">
-                                                <figure><a href="#"><img src="extra-images/featured-listing-5.jpg" alt=""></a></figure>
+                                                <figure><a href="#"><img src="~/static/img/extra-images/featured-listing-5.jpg" alt=""></a></figure>
                                                 <div class="careerfy-featured-listing-text">
                                                     <h2><a href="#">Dropbox -- UX designer</a></h2>
                                                     <a href="#" class="careerfy-like-list"><i class="careerfy-icon careerfy-heart"></i></a>
@@ -379,7 +267,7 @@
                                     <li class="careerfy-column-6">
                                         <div class="careerfy-table-layer">
                                             <div class="careerfy-table-row">
-                                                <figure><a href="#"><img src="extra-images/featured-listing-6.jpg" alt=""></a></figure>
+                                                <figure><a href="#"><img src="~/static/img/extra-images/featured-listing-6.jpg" alt=""></a></figure>
                                                 <div class="careerfy-featured-listing-text">
                                                     <h2><a href="#">Dropbox -- UX designer</a></h2>
                                                     <a href="#" class="careerfy-like-list"><i class="careerfy-icon careerfy-heart"></i></a>
@@ -414,7 +302,7 @@
                         <div class="careerfy-typo-wrap">
                             <div class="careerfy-testimonial-section">
                                 <div class="row">
-                                    <aside class="col-md-5"> <img src="extra-images/testimonial-thumb-1.jpg" alt=""> </aside>
+                                    <aside class="col-md-5"> <img src="~/static/img/extra-images/testimonial-thumb-1.jpg" alt=""> </aside>
                                     <aside class="col-md-7">
                                         <div class="careerfy-testimonial-slider">
                                             <div class="careerfy-testimonial-slide-layer">
@@ -461,7 +349,7 @@
                             <div class="careerfy-blog careerfy-blog-grid">
                                 <ul class="row">
                                     <li class="col-md-4">
-                                        <figure><a href="#"><img src="extra-images/blog-grid-1.jpg" alt=""></a></figure>
+                                        <figure><a href="#"><img src="~/static/img/extra-images/blog-grid-1.jpg" alt=""></a></figure>
                                         <div class="careerfy-blog-grid-text">
                                             <div class="careerfy-blog-tag"> <a href="#">Culture</a> </div>
                                             <h2><a href="#">Are You Paid Fairly? See Your Market Worth in Seconds</a></h2>
@@ -474,7 +362,7 @@
                                         </div>
                                     </li>
                                     <li class="col-md-4">
-                                        <figure><a href="#"><img src="extra-images/blog-grid-2.jpg" alt=""></a></figure>
+                                        <figure><a href="#"><img src="~/static/img/extra-images/blog-grid-2.jpg" alt=""></a></figure>
                                         <div class="careerfy-blog-grid-text">
                                             <div class="careerfy-blog-tag"> <a href="#">ENTERTAINMENT</a> </div>
                                             <h2><a href="#">Are You Paid Fairly? See Your Market Worth in Seconds</a></h2>
@@ -487,7 +375,7 @@
                                         </div>
                                     </li>
                                     <li class="col-md-4">
-                                        <figure><a href="#"><img src="extra-images/blog-grid-3.jpg" alt=""></a></figure>
+                                        <figure><a href="#"><img src="~/static/img/extra-images/blog-grid-3.jpg" alt=""></a></figure>
                                         <div class="careerfy-blog-grid-text">
                                             <div class="careerfy-blog-tag"> <a href="#">Living</a> </div>
                                             <h2><a href="#">Are You Paid Fairly? See Your Market Worth in Seconds</a></h2>
@@ -520,7 +408,7 @@
                                 <a href="#" class="careerfy-static-btn careerfy-bgcolor"><span>Search Jobs</span></a>
                             </div>
                         </aside>
-                        <aside class="col-md-6 careerfy-typo-wrap"> <div class="careerfy-logo-thumb"><img src="extra-images/multiple-logos.jpg" alt=""></div> </aside>
+                        <aside class="col-md-6 careerfy-typo-wrap"> <div class="careerfy-logo-thumb"><img src="~/static/img/extra-images/multiple-logos.jpg" alt=""></div> </aside>
 
                     </div>
                 </div>
@@ -528,75 +416,12 @@
             <!-- Main Section -->
 
         </div>
-        <!-- Main Content -->
-
-        <!-- Footer -->
-        <footer id="careerfy-footer" class="careerfy-footer-one">
-            <div class="container">
-                <!-- Footer Widget -->
-                <div class="careerfy-footer-widget">
-                    <div class="row">
-                        <aside class="widget col-md-4 widget_contact_info">
-                            <div class="widget_contact_wrap">
-                                <a class="careerfy-footer-logo" href="index.html"><img src="images/footer-logo.png" alt=""></a>
-                                <p>Sed consequat sapien faus quam bibendum convallis quis in nulla. Pellentesque volutpat odio eget diam cursus semper. Sed coquat sapien faucibus quam.</p>
-                                <a href="#" class="careerfy-classic-btn careerfy-bgcolor">Learn more</a>
-                            </div>
-                        </aside>
-                        <aside class="widget col-md-3 widget_nav_manu">
-                            <div class="footer-widget-title"><h2>Quick Links</h2></div>
-                            <ul>
-                                <li><a href="#">Shortcodes</a></li>
-                                <li><a href="#">Job Page</a></li>
-                                <li><a href="#">Job Page Alternative</a></li>
-                                <li><a href="#">Resume Page</a></li>
-                                <li><a href="#">Blog</a></li>
-                                <li><a href="#">Contact</a></li>
-                            </ul>
-                        </aside>
-                        <aside class="widget col-md-3 widget_nav_manu">
-                            <div class="footer-widget-title"><h2>For Candidates</h2></div>
-                            <ul>
-                                <li><a href="#">Browse Jobs</a></li>
-                                <li><a href="#">Browse Categories</a></li>
-                                <li><a href="#">Submit Resume</a></li>
-                                <li><a href="#">Candidate Dashboard</a></li>
-                                <li><a href="#">Job Alerts</a></li>
-                                <li><a href="#">My Bookmarks</a></li>
-                            </ul>
-                        </aside>
-                        <aside class="widget col-md-2 widget_nav_manu">
-                            <div class="footer-widget-title"><h2>For Employers</h2></div>
-                            <ul>
-                                <li><a href="#">Browse Candidates</a></li>
-                                <li><a href="#">Employer Dashboard</a></li>
-                                <li><a href="#">Add Job</a></li>
-                                <li><a href="#">Job Packages</a></li>
-                            </ul>
-                        </aside>
-                    </div>
-                </div>
-                <!-- Footer Widget -->
-                <!-- CopyRight -->
-                <div class="careerfy-copyright">
-                    <p>Copyrights © 2018 All Rights Reserved by <a href="#" class="careerfy-color">EyeCix</a></p>
-                    <ul class="careerfy-social-network">
-                        <li><a href="#" class="careerfy-bgcolorhover fa fa-facebook"></a></li>
-                        <li><a href="#" class="careerfy-bgcolorhover fa fa-twitter"></a></li>
-                        <li><a href="#" class="careerfy-bgcolorhover fa fa-dribbble"></a></li>
-                        <li><a href="#" class="careerfy-bgcolorhover fa fa-linkedin"></a></li>
-                        <li><a href="#" class="careerfy-bgcolorhover fa fa-instagram"></a></li>
-                    </ul>
-                </div>
-                <!-- CopyRight -->
-            </div>
-        </footer>
-        <!-- Footer -->
 
     </div>
-    <!-- Wrapper -->
 
-    <!-- ModalLogin Box -->
+    <!-- Main Content -->
+
+<!--    &lt;!&ndash; ModalLogin Box &ndash;&gt;
     <div class="careerfy-modal fade careerfy-typo-wrap" id="JobSearchModalSignup">
         <div class="modal-inner-area">&nbsp;</div>
         <div class="modal-content-area">
@@ -668,7 +493,7 @@
             </div>
         </div>
     </div>
-    <!-- Modal Signup Box -->
+    &lt;!&ndash; Modal Signup Box &ndash;&gt;
     <div class="careerfy-modal fade careerfy-typo-wrap" id="JobSearchModalLogin">
         <div class="modal-inner-area">&nbsp;</div>
         <div class="modal-content-area">
@@ -732,7 +557,7 @@
                                 </div>
                             </li>
                             <li class="careerfy-user-form-coltwo-full">
-                                <img src="extra-images/login-robot.png" alt="">
+                                <img src="~/static/img/extra-images/login-robot.png" alt="">
                             </li>
                             <li class="careerfy-user-form-coltwo-full">
                                 <input type="submit" value="Sign Up">
@@ -753,11 +578,11 @@
 
             </div>
         </div>
-    </div>
+    </div>-->
 
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="script/jquery.js"></script>
+<!--    <script src="script/jquery.js"></script>
     <script src="script/bootstrap.js"></script>
     <script src="script/slick-slider.js"></script>
     <script src="plugin-script/counter.js"></script>
@@ -765,9 +590,8 @@
     <script src="plugin-script/fancybox.pack.js"></script>
     <script src="plugin-script/isotope.min.js"></script>
     <script src="plugin-script/functions.js"></script>
-    <script src="script/functions.js"></script>
+    <script src="script/functions.js"></script>-->
 
-    </body>
 </template>
 
 <script>
@@ -793,6 +617,9 @@
 
         },
         methods: {
+            test() {
+                console.log("wwwww")
+            }
         }
     };
 </script>
