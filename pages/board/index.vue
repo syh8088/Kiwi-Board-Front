@@ -234,15 +234,18 @@
                                 <!-- JobGrid -->
                                 <div class="careerfy-job careerfy-joblisting-classic">
                                     <ul class="careerfy-row">
-                                        <li class="careerfy-column-12">
+
+
+
+                                        <li class="careerfy-column-12" v-for="(data, index) in MAIN_BOARDS" :key="index">
                                             <div class="careerfy-joblisting-classic-wrap">
                                                 <figure><a href="#"><img src="~/static/img/extra-images/job-listing-logo-1.png" alt=""></a></figure>
                                                 <div class="careerfy-joblisting-text">
                                                     <div class="careerfy-list-option">
-                                                        <h2><a href="#">Need Senior Rolling Stock Technician</a> <span>Featured</span></h2>
+                                                        <h2><a href="#">{{ data['title'] }}</a> <span>Featured</span></h2>
                                                         <ul>
-                                                            <li><a href="#">@ Massimo Artemisis</a></li>
-                                                            <li><i class="careerfy-icon careerfy-maps-and-flags"></i> Netherlands, Rotterdam</li>
+                                                            <li><a href="#">@ {{ data['memberResponse']['name'] }}</a></li>
+                                                            <li><i class="careerfy-icon careerfy-maps-and-flags"></i> {{ data['memberResponse']['email'] }}</li>
                                                             <li><i class="careerfy-icon careerfy-filter-tool-black-shape"></i> Sales & Marketing</li>
                                                         </ul>
                                                     </div>
@@ -254,7 +257,8 @@
                                                 </div>
                                             </div>
                                         </li>
-                                        <li class="careerfy-column-12">
+
+<!--                                        <li class="careerfy-column-12">
                                             <div class="careerfy-joblisting-classic-wrap">
                                                 <figure><a href="#"><img src="~/static/img/extra-images/job-listing-logo-2.png" alt=""></a></figure>
                                                 <div class="careerfy-joblisting-text">
@@ -473,7 +477,7 @@
                                                     <div class="clearfix"></div>
                                                 </div>
                                             </div>
-                                        </li>
+                                        </li>-->
                                     </ul>
                                 </div>
 
@@ -523,7 +527,9 @@
         }),
 
         computed: {
-
+            MAIN_BOARDS() {
+                return this.$store.state.board.mainBoards || [];
+            }
         },
         async fetch({ store }) {
             await store.dispatch('board/getBoards', { reset: true });

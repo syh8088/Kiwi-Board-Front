@@ -2,6 +2,7 @@ import Vue from 'vue';
 import {AUTH} from '~/data/constant/auth';
 import {COOKIES} from '~/data/constant/keys';
 import throttle from 'lodash.throttle';
+import BoardsModel from "../../data/models/board/Boards";
 
 const getMyClosetState = () => {
     return {
@@ -10,13 +11,12 @@ const getMyClosetState = () => {
         totalElements: 0,
         number: 0,
         size: 0,
+        mainBoards: [],
+        mainBoard: {},
 
         boardLimit: 10,
-
-        closetViewerCount: 0,
-        mainClosets: [],
+        boardViewerCount: 0,
         hasMoreBoard: true,
-        mainCloset: {},
     };
 };
 
@@ -25,18 +25,25 @@ export const state = () => {
 };
 
 export const mutations = {
-    loadBoards(state, { mainClosetsResponse, reset }) {
+    loadBoards(state, { mainBoardsResponse, reset }) {
+
+        const boardsModel = new BoardsModel();
+        boardsModel.setView({ ...mainBoardsResponse.boardResponses });
+        console.log(boardsModel.toView());
+
+        //console.log(mainBoardsResponse);
         if (reset) {
-            Vue.set(state, 'mainClosets', mainClosetsResponse.wardrobeResponses);
-            Vue.set(state, 'hasMoreCloset', true);
+            Vue.set(state, 'mainBoards', mainBoardsResponse.boardResponses);
+            Vue.set(state, 'hasMoreBoard', true);
         } else {
-            Vue.set(state, 'mainClosets', state.mainClosets.concat(mainClosetsResponse.wardrobeResponses));
-            Vue.set(state, 'hasMoreCloset', (mainClosetsResponse.wardrobeResponses.length >= state.closetLimit));
+            Vue.set(state, 'mainBoards', state.mainClosets.concat(mainBoardsResponse.boardResponses));
+            Vue.set(state, 'hasMoreBoard', (mainBoardsResponse.boardResponses.length >= state.boardLimit));
         }
 
-        Vue.set(state, 'currentPage', mainClosetsResponse.number);
-        Vue.set(state, 'totalPages', mainClosetsResponse.totalPages);
-        Vue.set(state, 'totalCount', mainClosetsResponse.totalElements);
+        Vue.set(state, 'number', mainBoardsResponse.number);
+        Vue.set(state, 'size', mainBoardsResponse.size);
+        Vue.set(state, 'totalPages', mainBoardsResponse.totalPages);
+        Vue.set(state, 'totalElements', mainBoardsResponse.totalElements);
     },
     loadBoard(state, { mainClosetResponse }) {
 
@@ -87,11 +94,11 @@ export const actions = {
             }
 
             const res = await this.$axios.get(`/boards`, { params: data });
-console.log(res.data)
-         /*   commit('loadBoards', {
-                mainClosetsResponse: res.data,
+
+            commit('loadBoards', {
+                mainBoardsResponse: res.data,
                 reset: payload.reset,
-            });*/
+            });
         } catch (error) {
             console.error("error.response >> getClosets", error);
         }
