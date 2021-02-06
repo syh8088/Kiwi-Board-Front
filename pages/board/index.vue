@@ -39,11 +39,12 @@
                                         <!-- Profile Title -->
                                         <div class="careerfy-profile-title">
                                             <h2>Transactions</h2>
-                                            <form class="careerfy-employer-search">
-                                                <input value="Search orders" onblur="if(this.value == '') { this.value ='Search orders'; }" onfocus="if(this.value =='Search orders') { this.value = ''; }" type="text">
-                                                <input type="submit" value="">
+                                            <div class="careerfy-employer-search">
+                                                <input value="Search orders" v-model="searchTitle" onblur="if(this.value == '') { this.value ='Search orders'; }" onfocus="if(this.value =='Search orders') { this.value = ''; }" type="text">
+                                                <input type="submit" value="" @click="toBoards({ title: searchTitle })">
+                                                <!--@click="toBoards({ title: this.value})"-->
                                                 <i class="careerfy-icon careerfy-search"></i>
-                                            </form>
+                                            </div>
                                         </div>
 
                                         <!-- Transactions -->
@@ -52,8 +53,8 @@
 
                                                 <div class="careerfy-table-layer careerfy-transactions-thead">
                                                     <div class="careerfy-table-row">
-                                                        <div class="careerfy-table-cell">Board Number</div>
-                                                        <div class="careerfy-table-cell">title</div>
+                                                        <div class="careerfy-table-cell">Number</div>
+                                                        <div class="careerfy-table-cell">Title</div>
                                                         <div class="careerfy-table-cell">Writer</div>
                                                         <div class="careerfy-table-cell">CreatedAt</div>
 <!--                                                        <div class="careerfy-table-cell">Payment Mode</div>
@@ -62,8 +63,8 @@
                                                 </div>
                                                 <div class="careerfy-table-layer careerfy-transactions-tbody" v-for="(data, index) in MAIN_BOARDS" :key="index">
                                                     <div class="careerfy-table-row">
-                                                        <div class="careerfy-table-cell">#{{ data['boardNo'] }}</div>
-                                                        <div class="careerfy-table-cell" @click="toBoardDetail({ data: data })"><span>{{ data['title'] }}</span></div>
+                                                        <div class="careerfy-table-cell">{{ data['number'] }}</div>
+                                                        <div class="careerfy-table-cell" style="cursor:pointer" @click="toBoardDetail({ data: data })"><span>{{ data['title'] }}</span></div>
                                                         <div class="careerfy-table-cell"><small>{{ data['memberResponse']['id'] }}</small></div>
                                                         <div class="careerfy-table-cell">{{ data['createdAt'] }}</div>
 <!--                                                        <div class="careerfy-table-cell">Bank Transfer</div>
@@ -74,16 +75,20 @@
                                             </div>
                                         </div>
 
-
                                         <!-- Pagination -->
                                         <div class="careerfy-pagination-blog">
                                             <ul class="page-numbers">
-                                                <li><a class="prev page-numbers" href="#"><span><i class="careerfy-icon careerfy-arrows4"></i></span></a></li>
-                                                <li><span class="page-numbers current">01</span></li>
-                                                <li><a class="page-numbers" href="#">02</a></li>
-                                                <li><a class="page-numbers" href="#">03</a></li>
-                                                <li><a class="page-numbers" href="#">04</a></li>
-                                                <li><a class="next page-numbers" href="#"><span><i class="careerfy-icon careerfy-arrows4"></i></span></a></li>
+                                                <li><a class="prev page-numbers" href="javascript:void(0);"><span><i class="careerfy-icon careerfy-arrows4"></i></span></a></li>
+
+                                                <li v-for="(page, index) in TOTAL_PAGES" :key="index">
+                                                    <span v-if="NUMBER === page" class="page-numbers current">{{ page }}</span>
+                                                    <a v-else class="page-numbers" href="javascript:void(0);" @click="toBoards({ page: page })">{{ page }}</a>
+                                                </li>
+                                               <!-- <li><a class="page-numbers" href="javascript:void(0);">02</a></li>
+                                                <li><a class="page-numbers" href="javascript:void(0);">03</a></li>
+                                                <li><a class="page-numbers" href="javascript:void(0);">04</a></li>-->
+
+                                                <li><a class="next page-numbers" href="javascript:void(0);"><span><i class="careerfy-icon careerfy-arrows4"></i></span></a></li>
                                             </ul>
                                         </div>
 
@@ -115,20 +120,41 @@
         },
         props: {
         },
-
-        data: () => ({
-        }),
-
+        data() {
+            return {
+                searchTitle: ''
+            };
+        },
         computed: {
             MAIN_BOARDS() {
                 return this.$store.state.board.mainBoards || [];
+            },
+            /**
+             * @return {number}
+             */
+            NUMBER() {
+                return this.$store.state.board.number || 0;
+            },
+            SIZE() {
+                return this.$store.state.board.size || 0;
+            },
+            /**
+             * @return {number}
+             */
+            TOTAL_PAGES() {
+                return this.$store.state.board.totalPages || 0;
+            },
+            /**
+             * @return {number}
+             */
+            TOTAL_ELEMENTS() {
+                return this.$store.state.board.totalElements || 0;
             }
         },
         async fetch({ store }) {
             await store.dispatch('board/getBoards', { reset: true });
         },
         beforeMount() {
-
         },
         methods: {
             toBoardDetail({ data }) {
@@ -136,6 +162,9 @@
             },
             createBoard() {
                 this.$router.push({ path: `/board/create` });
+            },
+            async toBoards({ page, title }) {
+                const res = await this.$store.dispatch('board/getBoards', { page: page, reset: false, title: title || '' });
             }
         }
     };

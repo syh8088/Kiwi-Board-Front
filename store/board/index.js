@@ -39,7 +39,8 @@ export const mutations = {
             Vue.set(state, 'mainBoards', mainBoardsResponse.boardResponses);
             Vue.set(state, 'hasMoreBoard', true);
         } else {
-            Vue.set(state, 'mainBoards', state.mainClosets.concat(mainBoardsResponse.boardResponses));
+            //Vue.set(state, 'mainBoards', state.mainClosets.concat(mainBoardsResponse.boardResponses));
+            Vue.set(state, 'mainBoards', mainBoardsResponse.boardResponses);
             Vue.set(state, 'hasMoreBoard', (mainBoardsResponse.boardResponses.length >= state.boardLimit));
         }
 
@@ -65,12 +66,14 @@ export const actions = {
                 data = {
                     offset: 1,
                     limit: state.boardLimit,
+                    title: payload.title || ''
                 };
             } else {
                 //const lastPost = state.mainBoards[state.mainBoards.length - 1];
                 data = {
                     offset: payload.page || 1,
                     limit: state.boardLimit,
+                    title: payload.title || ''
                 };
             }
 

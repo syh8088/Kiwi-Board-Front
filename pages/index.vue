@@ -607,7 +607,6 @@
         },
 
         data: () => ({
-            name: 'hi'
         }),
 
         computed: {
@@ -617,9 +616,6 @@
 
         },
         methods: {
-            test() {
-                console.log("wwwww")
-            }
         }
     };
 </script>
