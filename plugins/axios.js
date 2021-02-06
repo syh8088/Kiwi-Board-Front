@@ -1,7 +1,7 @@
 export default function({ $axios, store, redirect  }) {
     $axios.onError(error => {
 
-        console.log("############################################################axios -> ERROR", error.response.status)
+        console.log("############################################################axios -> ERROR",  error.response)
         if (error.response && error.response.status >= 200 && error.response.status >= 300) {
             if(error.response.data.error === `invalid_token`) {
                 store.dispatch(`setRedirectUrl`, { redirectUrl: store.$router.history.current.path });
@@ -17,16 +17,31 @@ export default function({ $axios, store, redirect  }) {
                     duration : 2000
                 });
             } else {
+                store.$toast.show(error.response.data, {
+                    theme: "toasted-primary",
+                    position: "bottom-center",
+                    duration : 2000
+                });
 
-
-             //   return Promise.reject("vvsdvsdvdvs");
             }
         }
     });
 
     $axios.onRequest(config => {
-        //config.headers["Content-Type"] = "application/json";
-        //config.headers["Access-Control-Allow-Origin"] = "*";
-        //store.dispatch("validation/clearErrors");
+        console.log(" ★★★★★★★★★★★★★★API START store.getters['member/isAuthenticated']", store.getters['member/isAuthenticated'])
+        if(process.client) {
+            console.log("★★★★★★★★★★★★★★API START ")
+
+        }
+
+    });
+
+
+    $axios.onResponse(res => {
+        console.log("★★★★★★★★★★★★★★API END $axios.onResponse")
+        if(process.client) {
+            console.log("★★★★★★★★★★★★★★API END")
+        }
+
     });
 }

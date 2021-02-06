@@ -1,6 +1,6 @@
 import BaseModel from '../BaseModel';
 
-class BoardsModel extends BaseModel {
+class BoardModel extends BaseModel {
 
     constructor() {
         super();
@@ -40,4 +40,4 @@ class BoardsModel extends BaseModel {
 }
 
 
-export default BoardsModel;
+export default BoardModel;

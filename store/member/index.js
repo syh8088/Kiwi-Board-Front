@@ -48,16 +48,30 @@ export const actions = {
     },
     async signUp({ commit }, payload) {
         try {
-            console.log(commit)
-            console.log(payload)
             const res = await this.$axios.post(`/members`, payload);
-            console.log(res )
             return res;
         } catch (error) {
             console.error("error.response", error.response);
         }
     },
+    async signIn({ commit, rootState }, payload) {
+        try {
+            this.$axios.defaults.headers.Authorization = `Basic ${AUTH.LOGIN_AUTHORIZATION_KEY}`;
+            const res = await this.$axios.post(`http://localhost:8083/oauth/token`, jsonToForm(payload));
+            const { access_token } = res.data;
+            console.log("access_token = " + access_token)
+            commit('setCookie', {
+                key: COOKIES.ACCESS_TOKEN,
+                value: access_token,
+                expires: 365,
+                secure: true
+            }, { root: true });
 
+            return res;
+        } catch (error) {
+            console.error("login >> error", error);
+        }
+    },
 };
 
 export const getters = {

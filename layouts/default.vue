@@ -111,7 +111,7 @@
                                 <div class="careerfy-right" >
                                     <ul class="careerfy-user-section">
                                         <li ><a class="careerfy-color careerfy-open-signin-tab" href="javascript:;" @click="onJobSearchModalSignupClick">Register</a></li>
-                                        <li><a class="careerfy-color careerfy-open-signup-tab" href="javascript:;">Sign in</a></li>
+                                        <li><a class="careerfy-color careerfy-open-signup-tab" href="javascript:;" @click="onJobSearchModalSigninClick">Sign in</a></li>
                                     </ul>
                                     <a href="#" class="careerfy-simple-btn careerfy-bgcolor"><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>
                                 </div>
@@ -189,12 +189,20 @@
             </div>
             <!-- Wrapper -->
 
-            <!-- ModalLogin Box -->
+            <!-- Modal Signup Box -->
             <sign-up
                     :sign-up-fade-in="signUpFadeIn"
-                    :modal="model"
+                    :modal="signUpModel"
                     @onJobSearchModalSignupClick="onJobSearchModalSignupClick"
                     @signUp="signUp"
+            />
+
+            <!-- ModalLogin Box -->
+            <sign-in
+                    :sign-in-fade-in="signInFadeIn"
+                    :modal="signInModel"
+                    @onJobSearchModalSigninClick="onJobSearchModalSigninClick"
+                    @signIn="signIn"
             />
 
         </body>
@@ -203,10 +211,12 @@
 
 <script>
     import SignUp from '~/components/member/SignUp';
+    import SignIn from '~/components/member/SignIn';
 
     export default {
         components: {
-            SignUp
+            SignUp,
+            SignIn
         },
         created() {
             console.log("w???")
@@ -220,24 +230,39 @@
         data() {
             return {
                 signUpFadeIn: false,
-                model: {
+                signInFadeIn: false,
+                signUpModel: {
                     email: '',
                     id: "",
                     name: "",
+                    password: ""
+                },
+                signInModel: {
+                    id: "",
                     password: ""
                 }
             };
         },
         methods: {
             onJobSearchModalSignupClick() {
-                console.log("eeeedddddddddddddddddddddddd");
                 this.signUpFadeIn = (!this.signUpFadeIn);
-
-                // this.$set(this.me, 'gender', gender);
+            },
+            onJobSearchModalSigninClick() {
+                this.signInFadeIn = (!this.signInFadeIn);
             },
             async signUp() {
-                const joinResponse = await this.$store.dispatch('member/signUp', this.model);
+                const joinResponse = await this.$store.dispatch('member/signUp', this.signUpModel);
             },
+            async signIn() {
+
+                const data = {
+                    username: this.signInModel.id,
+                    password: this.signInModel.password,
+                    grant_type: 'password'
+                };
+                const res = await this.$store.dispatch('member/signIn', data);
+            },
+
         }
     };
 </script>

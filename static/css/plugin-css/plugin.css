@@ -3262,7 +3262,7 @@ body.careerfy-modal-active{
     height: 100%;
     overflow-y: scroll;
     -ms-overflow-y: scroll;
-    z-index: 99999;
+    z-index: 9999;
     text-align: center;
 }
 .careerfy-modal .modal-box-area {

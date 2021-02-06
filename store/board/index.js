@@ -3,10 +3,10 @@ import {AUTH} from '~/data/constant/auth';
 import {COOKIES} from '~/data/constant/keys';
 import throttle from 'lodash.throttle';
 import BoardsModel from "../../data/models/board/Boards";
+import BoardModel from "../../data/models/board/Board";
 
 const getMyClosetState = () => {
     return {
-
         totalPages: 0,
         totalElements: 0,
         number: 0,
@@ -29,9 +29,12 @@ export const mutations = {
 
         const boardsModel = new BoardsModel();
         boardsModel.setView({ ...mainBoardsResponse.boardResponses });
-        console.log(boardsModel.toView());
+        const boardsResponse = boardsModel.toView();
 
-        //console.log(mainBoardsResponse);
+        console.log(boardsResponse);
+        console.log(mainBoardsResponse);
+
+
         if (reset) {
             Vue.set(state, 'mainBoards', mainBoardsResponse.boardResponses);
             Vue.set(state, 'hasMoreBoard', true);
@@ -45,34 +48,12 @@ export const mutations = {
         Vue.set(state, 'totalPages', mainBoardsResponse.totalPages);
         Vue.set(state, 'totalElements', mainBoardsResponse.totalElements);
     },
-    loadBoard(state, { mainClosetResponse }) {
+    loadBoard(state, { mainBoardResponse }) {
+        const boardModel = new BoardModel();
+        boardModel.setView(mainBoardResponse );
+        const boardResponse = boardModel.toView();
 
-        const {
-            id,
-            name,
-            image,
-            subCategoryId,
-            subCategoryName,
-            registerType,
-            sizeOptionName,
-            wardrobeScmmValueResponses,
-            measureItemResponses,
-            subCategoryResponses,
-            dmodelResponse
-        } = mainClosetResponse;
-        Vue.set(state, 'mainCloset', {
-            id: id,
-            name: name,
-            image: image,
-            subCategoryId: subCategoryId,
-            subCategoryName: subCategoryName,
-            registerType: registerType,
-            sizeOptionName: sizeOptionName,
-            wardrobeScmmValueResponses: wardrobeScmmValueResponses,
-        });
-        /* Vue.set(state, 'measureItems', measureItemResponses);
-         Vue.set(state, 'categories', subCategoryResponses);
-         Vue.set(state, 'dmodel', dmodelResponse);*/
+        Vue.set(state, 'mainBoard', boardResponse);
     },
 };
 
@@ -86,7 +67,7 @@ export const actions = {
                     limit: state.boardLimit,
                 };
             } else {
-                //const lastPost = state.mainClosets[state.mainClosets.length - 1];
+                //const lastPost = state.mainBoards[state.mainBoards.length - 1];
                 data = {
                     offset: payload.page || 1,
                     limit: state.boardLimit,
@@ -100,8 +81,58 @@ export const actions = {
                 reset: payload.reset,
             });
         } catch (error) {
-            console.error("error.response >> getClosets", error);
+            console.error("error.response >> getBoards", error);
         }
     }, 2000),
 
+    async getBoard({ commit, rootState }, payload) {
+        try {
+            this.$axios.defaults.headers['Content-Type'] = `application/json`;
+            const res = await this.$axios.get(`/boards/${payload}`);
+
+            commit('loadBoard', {
+                mainBoardResponse: res.data
+            });
+        } catch (error) {
+            console.error("error.response >> getBoard", error.response);
+        }
+    },
+
+    async saveBoard({ commit, rootState }, payload) {
+        try {
+            this.$axios.defaults.headers['Content-Type'] = `application/json`;
+            const res = await this.$axios.post(`/boards`, payload);
+
+        } catch (error) {
+            console.error("error.response >> saveBoard", error.response);
+        }
+    },
+
+    async updateBoard({ commit, rootState }, payload) {
+        try {
+
+            const data = {
+                title: payload.title,
+                content: payload.content
+            };
+
+        //    this.$axios.defaults.headers.Authorization = `Bearer ${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
+            this.$axios.defaults.headers['Content-Type'] = `application/json`;
+            const res = await this.$axios.patch(`/boards/${payload.boardNo}`, data);
+
+        } catch (error) {
+            console.error("error.response >> updateBoard", error.response);
+        }
+    },
+
+    async deleteBoard({ commit, rootState }, payload) {
+        try {
+            //    this.$axios.defaults.headers.Authorization = `Bearer ${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
+            this.$axios.defaults.headers['Content-Type'] = `application/json`;
+            const res = await this.$axios.delete(`/boards/${payload.boardNo}`);
+
+        } catch (error) {
+            console.error("error.response >> updateBoard", error.response);
+        }
+    },
 };

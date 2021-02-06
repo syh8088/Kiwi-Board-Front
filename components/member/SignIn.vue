@@ -1,7 +1,7 @@
 <template>
 
     <!-- fade fade-in -->
-    <div class="careerfy-modal fade careerfy-typo-wrap" v-bind:class="MODAL_SWITCH_CLASS" id="JobSearchModalSignup">
+    <div class="careerfy-modal fade careerfy-typo-wrap" v-bind:class="MODAL_SWITCH_CLASS" id="JobSearchModalSignin">
         <div class="modal-inner-area">&nbsp;</div>
         <div class="modal-content-area">
             <div class="modal-box-area">
@@ -36,7 +36,7 @@
                         <ul>
                             <li>
                                 <label>Id:</label>
-                                <input value="Enter Id" v-model="MODAL['id']" type="text">
+                                <input value="Enter Your Id" v-model="MODAL['id']" type="text">
                                 <i class="careerfy-icon careerfy-mail"></i>
                             </li>
                             <li>
@@ -45,22 +45,12 @@
                                 <i class="careerfy-icon careerfy-multimedia"></i>
                             </li>
                             <li>
-                                <label>Email Address:</label>
-                                <input value="Enter Your Email Address" v-model="MODAL['email']" type="text">
-                                <i class="careerfy-icon careerfy-mail"></i>
-                            </li>
-                            <li>
-                                <label>Name:</label>
-                                <input value="Enter Your Name" v-model="MODAL['name']" type="text">
-                                <i class="careerfy-icon careerfy-mail"></i>
-                            </li>
-                            <li>
-                                <input type="submit" @click="signUp" value="Sign In">
+                                <input type="submit" @click="signIn" value="Sign In">
                             </li>
                         </ul>
                         <div class="clearfix"></div>
                         <div class="careerfy-user-form-info">
-                            <p>Forgot Password? | <a href="#">Sign Up</a></p>
+                            <p>Forgot Password? | <a href="javascript:void(0);">Sign Up</a></p>
                             <div class="careerfy-checkbox">
                                 <input type="checkbox" id="r10" name="rr" />
                                 <label for="r10"><span></span> Remember Password</label>
@@ -86,10 +76,10 @@
 
 <script>
     export default {
-        name: 'Sign-Up',
+        name: 'Sign-In',
         inject: ['$validator'],
         props: {
-            signUpFadeIn: {
+            signInFadeIn: {
                 type: Boolean,
                 default: () => ''
             },
@@ -104,17 +94,17 @@
                 return this.modal || {};
             },
             MODAL_SWITCH_CLASS() {
-               // return () => {
-                    let modalClassName = '';
+                // return () => {
+                let modalClassName = '';
 
-                    if (this.signUpFadeIn) {
-                        modalClassName = `fade-in`;
-                    } else {
-                        modalClassName = `fade`;
-                    }
-                    return {
-                        [modalClassName]: true
-                    }
+                if (this.signInFadeIn) {
+                    modalClassName = `fade-in`;
+                } else {
+                    modalClassName = `fade`;
+                }
+                return {
+                    [modalClassName]: true
+                }
                 //};
             },
 
@@ -122,10 +112,10 @@
         },
         methods: {
             modalClose() {
-                this.$emit('onJobSearchModalSignupClick');
+                this.$emit('onJobSearchModalSigninClick');
             },
-            signUp() {
-                this.$emit('signUp');
+            signIn() {
+                this.$emit('signIn');
             }
         },
     }
