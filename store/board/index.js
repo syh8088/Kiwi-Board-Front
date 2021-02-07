@@ -1,7 +1,6 @@
 import Vue from 'vue';
-import {AUTH} from '~/data/constant/auth';
-import {COOKIES} from '~/data/constant/keys';
 import throttle from 'lodash.throttle';
+import {COOKIES} from '~/data/constant/keys';
 import BoardsModel from "../../data/models/board/Boards";
 import BoardModel from "../../data/models/board/Board";
 
@@ -103,9 +102,10 @@ export const actions = {
 
     async saveBoard({ commit, rootState }, payload) {
         try {
-            this.$axios.defaults.headers['Content-Type'] = `application/json`;
-            const res = await this.$axios.post(`/boards`, payload);
 
+            this.$axios.defaults.headers.Authorization = `Bearer ${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
+            this.$axios.defaults.headers['Content-Type'] = `application/json`;
+            return await this.$axios.post(`/boards`, payload);
         } catch (error) {
             console.error("error.response >> saveBoard", error.response);
         }
@@ -119,7 +119,7 @@ export const actions = {
                 content: payload.content
             };
 
-        //    this.$axios.defaults.headers.Authorization = `Bearer ${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
+            this.$axios.defaults.headers.Authorization = `Bearer ${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
             this.$axios.defaults.headers['Content-Type'] = `application/json`;
             const res = await this.$axios.patch(`/boards/${payload.boardNo}`, data);
 
@@ -130,7 +130,8 @@ export const actions = {
 
     async deleteBoard({ commit, rootState }, payload) {
         try {
-            //    this.$axios.defaults.headers.Authorization = `Bearer ${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
+
+            this.$axios.defaults.headers.Authorization = `Bearer ${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
             this.$axios.defaults.headers['Content-Type'] = `application/json`;
             const res = await this.$axios.delete(`/boards/${payload.boardNo}`);
 

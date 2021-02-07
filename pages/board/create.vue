@@ -100,6 +100,8 @@
         async fetch({ store, route }) {
             if (route.query && route.query['boardNo']) {
                 await store.dispatch('board/getBoard', route.query['boardNo']);
+            } else {
+                store.state.board.mainBoard = {};
             }
         },
         beforeMount() {

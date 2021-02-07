@@ -1,5 +1,6 @@
 import Vue from 'vue';
 export const strict = false;
+import {COOKIES} from '~/data/constant/keys';
 
 const getDefaultState = () => {
     return {
@@ -16,7 +17,14 @@ export const state = () => {
 };
 
 export const mutations = {
-    fetchInit(state, {  }) {
+    fetchInit(state) {
+        const cookies = this.$cookies.getAll();
+        Vue.set(state, 'cookies', cookies || {});
+
+        const meInfo = state.cookies[COOKIES.ME] || '';
+        if (meInfo) {
+            Vue.set(state.cookies, COOKIES.ME, meInfo);
+        }
 
     },
     setCookie(state, { key, value, expires, secure = false }) {
@@ -38,9 +46,18 @@ export const mutations = {
 export const actions  =  {
     async nuxtServerInit({ commit, state, dispatch }, context) {
         console.log("#######################nuxtServerInit#######################");
-
+        commit('fetchInit');
     },
     nuxtClientInit({ commit, state, dispatch }, { req })  {
         console.log('#######################nuxtClientInit#######################');
+    },
+    fetchLogout({ rootState, state, dispatch, commit })  {
+
+        commit('removeCookie', {
+            key: COOKIES.ACCESS_TOKEN
+        });
+        commit('removeCookie', {
+            key: COOKIES.ME
+        });
     },
 };

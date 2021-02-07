@@ -1,23 +1,6 @@
 import {AUTH} from '~/data/constant/auth';
 import {COOKIES} from '~/data/constant/keys';
 
-
-/*
-const storageAccessToken = (() => {
-    let storageData;
-    try {
-        storageData = localStorage.getItem('zeyo_accessToken');
-        console.log("storageData", storageData)
-        if (storageData) {
-            storageData = JSON.parse(decodeURIComponent(atob(storageData)));
-        }
-    } catch (error) {
-        console.log("에러??");
-        console.error('storageAccessToken error', error);
-    }
-    return storageData;
-})();*/
-
 const getMemberState = () => {
     return {
         findMemberId: '',
@@ -69,7 +52,23 @@ export const actions = {
 
             return res;
         } catch (error) {
-            console.error("login >> error", error);
+            console.error("signIn >> error", error);
+        }
+    },
+    async getMe({ commit, rootState }, payload) {
+        try {
+            this.$axios.defaults.headers.Authorization = `Bearer ${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
+            const res = await this.$axios.get(`/members/me`);
+            commit('setCookie', {
+                key: COOKIES.ME,
+                value: res.data,
+                expires: 365,
+                secure: true
+            }, { root: true });
+
+            return res;
+        } catch (error) {
+            console.error("error.response >>> getMe", error.response);
         }
     },
 };
@@ -77,7 +76,9 @@ export const actions = {
 export const getters = {
 
     isAuthenticated(state, getters, rootState) {
-        //return !!(rootState.cookies[COOKIES] && rootState.cookies[COOKIES]);
+
+        console.log("rootState.cookies[COOKIES.ME]", rootState.cookies)
+        return !!(rootState.cookies[COOKIES.ME] && rootState.cookies[COOKIES.ME]);
     },
     getMe(state) {
       //  return JSON.parse(localStorage.me || '') || '';

@@ -11,7 +11,7 @@
                     <span class="modal-close" @click="modalClose"><i class="fa fa-times"></i></span>
                 </div>
                 <!--<form>-->
-                    <div class="careerfy-box-title">
+<!--                    <div class="careerfy-box-title">
                         <span>Choose your Account Type</span>
                     </div>
                     <div class="careerfy-user-options">
@@ -31,7 +31,7 @@
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div>-->
                     <div class="careerfy-user-form">
                         <ul>
                             <li>
@@ -41,7 +41,7 @@
                             </li>
                             <li>
                                 <label>Password:</label>
-                                <input value="Enter Password" v-model="MODAL['password']" type="text">
+                                <input value="Enter Password" v-model="MODAL['password']" type="password" style="width: 100%;">
                                 <i class="careerfy-icon careerfy-multimedia"></i>
                             </li>
                             <li>
@@ -51,22 +51,22 @@
                         <div class="clearfix"></div>
                         <div class="careerfy-user-form-info">
                             <p>Forgot Password? | <a href="javascript:void(0);">Sign Up</a></p>
-                            <div class="careerfy-checkbox">
+                            <!--<div class="careerfy-checkbox">
                                 <input type="checkbox" id="r10" name="rr" />
                                 <label for="r10"><span></span> Remember Password</label>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
-                    <div class="careerfy-box-title careerfy-box-title-sub">
+                    <!--<div class="careerfy-box-title careerfy-box-title-sub">
                         <span>Or Sign In With</span>
-                    </div>
+                    </div>-->
                     <div class="clearfix"></div>
-                    <ul class="careerfy-login-media">
+                    <!--<ul class="careerfy-login-media">
                         <li><a href="javascript:void(0);"><i class="fa fa-facebook"></i> Sign In with Facebook</a></li>
                         <li><a href="javascript:void(0);" data-original-title="google"><i class="fa fa-google"></i> Sign In with Google</a></li>
                         <li><a href="javascript:void(0);" data-original-title="twitter"><i class="fa fa-twitter"></i> Sign In with Twitter</a></li>
                         <li><a href="javascript:void(0);" data-original-title="linkedin"><i class="fa fa-linkedin"></i> Sign In with LinkedIn</a></li>
-                    </ul>
+                    </ul>-->
                <!-- </form>-->
 
             </div>

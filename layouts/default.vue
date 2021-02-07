@@ -29,21 +29,22 @@
                                     </div>
                                     <div class="collapse navbar-collapse" id="careerfy-navbar-collapse-1">
                                         <ul class="navbar-nav">
-                                            <li class="active"><a href="index.html">Home</a>
+                                            <li class="active"><a href="javascript:void(0);">Home</a>
                                                 <ul class="sub-menu">
-                                                    <li><a href="https://eyecix.com/html/careerfy/">Demo Careerfy</a></li>
-                                                    <li><a href="https://eyecix.com/html/careerfy-demos/hireright-demo/">Demo Hireright</a></li>
+                                                    <nuxt-link to="/"><li><a href="javascript:void(0);">Home</a></li></nuxt-link>
+                                                    <!--<li><a href="https://eyecix.com/html/careerfy-demos/hireright-demo/">Demo Hireright</a></li>
                                                     <li><a href="https://eyecix.com/html/careerfy-demos/jobshub-demo/">Demo Jobshub</a></li>
                                                     <li><a href="https://eyecix.com/html/careerfy-demos/belovedjobs/">Demo BelovedJobs</a></li>
                                                     <li><a href="index-five.html">Demo JobsOnline</a></li>
                                                     <li><a href="index-six.html">Demo JobSearch</a></li>
-                                                    <li><a href="index-seven.html">Demo JobFinder</a></li>
+                                                    <li><a href="index-seven.html">Demo JobFinder</a></li>-->
                                                 </ul>
                                             </li>
-                                            <li><a href="#">Pages</a>
+                                            <li><a href="javascript:void(0);">Pages</a>
                                                 <ul class="sub-menu">
-                                                    <li><a href="about-us.html">About Us</a></li>
-                                                    <li><a href="cv-packages.html">CV Packages</a></li>
+                                                    <nuxt-link to="/board"><li><a href="javascript:void(0);">Board</a></li></nuxt-link>
+
+                                                    <!--<li><a href="cv-packages.html">CV Packages</a></li>
                                                     <li><a href="faq.html">Faq's</a></li>
                                                     <li><a href="job-grid-full.html">Job Grid</a></li>
                                                     <li><a href="job-grid-with-filters.html">Job Grid W/filter</a></li>
@@ -56,10 +57,10 @@
                                                             <li><a href="job-detail-four.html">Job Detail IV</a></li>
                                                         </ul>
                                                     </li>
-                                                    <li><a href="job-packages.html">Job Packages</a></li>
+                                                    <li><a href="job-packages.html">Job Packages</a></li>-->
                                                 </ul>
                                             </li>
-                                            <li><a href="#">For Candidates</a>
+                                            <!--<li><a href="#">For Candidates</a>
                                                 <ul class="sub-menu">
                                                     <li><a href="candidate-dashboard-applied-jobs.html">Applied Jobs</a></li>
                                                     <li><a href="candidate-dashboard-changed-password.html">Changed Password</a></li>
@@ -102,18 +103,22 @@
                                                     <li><a href="employer-dashboard-confitmation.html">Employer Confitmation</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="contact-us.html">Contact</a></li>
+                                            <li><a href="contact-us.html">Contact</a></li>-->
                                         </ul>
                                     </div>
                                 </nav>
                             </aside>
                             <aside class="col-md-4">
                                 <div class="careerfy-right" >
-                                    <ul class="careerfy-user-section">
+                                    <ul class="careerfy-user-section" v-if="!IS_AUTHENTICATED">
                                         <li ><a class="careerfy-color careerfy-open-signin-tab" href="javascript:;" @click="onJobSearchModalSignupClick">Register</a></li>
                                         <li><a class="careerfy-color careerfy-open-signup-tab" href="javascript:;" @click="onJobSearchModalSigninClick">Sign in</a></li>
                                     </ul>
-                                    <a href="#" class="careerfy-simple-btn careerfy-bgcolor"><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>
+                                    <ul class="careerfy-user-section" v-else-if="IS_AUTHENTICATED">
+                                        <li >Welcome {{ ME['id'] }}</li>
+                                        <li ><a class="careerfy-color careerfy-open-signin-tab" href="javascript:;" @click="onLogoutClick">Logout</a></li>
+                                    </ul>
+                                    <!--<a href="#" class="careerfy-simple-btn careerfy-bgcolor"><span> <i class="careerfy-icon careerfy-arrows-2"></i> Post Job</span></a>-->
                                 </div>
                             </aside>
                         </div>
@@ -212,6 +217,8 @@
 <script>
     import SignUp from '~/components/member/SignUp';
     import SignIn from '~/components/member/SignIn';
+    import {COOKIES} from '~/data/constant/keys';
+    import { mapActions } from 'vuex';
 
     export default {
         components: {
@@ -219,13 +226,17 @@
             SignIn
         },
         created() {
-            console.log("w???")
         },
         async beforeMount() {
 
         },
         computed: {
-
+            IS_AUTHENTICATED() {
+                return this.$store.getters['member/isAuthenticated'] || false;
+            },
+            ME() {
+                return this.$store.state.cookies[COOKIES.ME] || '';
+            },
         },
         data() {
             return {
@@ -251,7 +262,10 @@
                 this.signInFadeIn = (!this.signInFadeIn);
             },
             async signUp() {
-                const joinResponse = await this.$store.dispatch('member/signUp', this.signUpModel);
+                const res = await this.$store.dispatch('member/signUp', this.signUpModel);
+                if (res && (res.status >= 200 && res.status <= 300)) {
+                    this.signUpFadeIn = false;
+                }
             },
             async signIn() {
 
@@ -261,7 +275,24 @@
                     grant_type: 'password'
                 };
                 const res = await this.$store.dispatch('member/signIn', data);
+                if (res && (res.status >= 200 && res.status <= 300)) {
+                    await this.getMe();
+                    this.signInFadeIn = false;
+                }
             },
+            async getMe() {
+                const resMe = await this.$store.dispatch('member/getMe', { isAuthenticated: true });
+                if (resMe && resMe.status >= 200 && resMe.status <= 300) {
+
+                }
+            },
+            ...mapActions({
+                LOGOUT: 'fetchLogout',
+            }),
+            onLogoutClick() {
+                this.LOGOUT();
+                this.$router.push({ path: `/`});
+            }
 
         }
     };
