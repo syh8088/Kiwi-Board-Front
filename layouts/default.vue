@@ -17,7 +17,7 @@
                 <header id="careerfy-header" class="careerfy-header-one">
                     <div class="container">
                         <div class="row">
-                            <aside class="col-md-2"> <a href="index.html" class="careerfy-logo"><img src="~/static/img/logo.png" alt=""></a> </aside>
+                            <aside class="col-md-2"> <nuxt-link to="/"><a href="javascript:void(0);" class="careerfy-logo"><img src="~/static/img/logo.png" alt=""></a></nuxt-link> </aside>
                             <aside class="col-md-6">
                                 <nav class="careerfy-navigation">
                                     <div class="navbar-header">

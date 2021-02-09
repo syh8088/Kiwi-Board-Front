@@ -101,14 +101,14 @@ export const actions = {
     },
 
     async saveBoard({ commit, rootState }, payload) {
-        try {
-
+       // try {
+console.log(rootState.cookies[COOKIES.ACCESS_TOKEN]);
             this.$axios.defaults.headers.Authorization = `Bearer ${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
             this.$axios.defaults.headers['Content-Type'] = `application/json`;
-            return await this.$axios.post(`/boards`, payload);
-        } catch (error) {
-            console.error("error.response >> saveBoard", error.response);
-        }
+            await this.$axios.post(`/boards`, payload);
+       // } catch (error) {
+          //  console.error("error.response >> saveBoard", error.response);
+       // }
     },
 
     async updateBoard({ commit, rootState }, payload) {

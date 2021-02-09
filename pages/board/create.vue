@@ -7,8 +7,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="careerfy-page-title">
-                            <h1>Companies</h1>
-                            <p>Thousands of prestigious employers for you, search for a recruiter right now.</p>
+                            <h1>Board</h1>
+                            <!--<p>Thousands of prestigious employers for you, search for a recruiter right now.</p>-->
                         </div>
                     </div>
                 </div>
@@ -16,9 +16,9 @@
             <div class="clearfix"></div>
             <div class="careerfy-breadcrumb">
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Pages</a></li>
-                    <li>Candidates</li>
+                    <li><nuxt-link to="/"><a href="javascript:void(0);">Home</a></nuxt-link></li>
+                    <li><a href="javascript:void(0);">Pages</a></li>
+                    <li><nuxt-link to="/board">Board</nuxt-link></li>
                 </ul>
             </div>
         </div>
@@ -114,7 +114,7 @@
                     title: this.MAIN_BOARD['title'],
                     content: this.MAIN_BOARD['content']
                 };
-                const res = await this.$store.dispatch(`board/saveBoard`, data);
+                await this.$store.dispatch(`board/saveBoard`, data);
                 this.$router.push({ path: `/board` });
             },
             async updateBoard() {
