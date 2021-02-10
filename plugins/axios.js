@@ -8,7 +8,12 @@ export default function({ $axios, store, redirect  }) {
                 store.dispatch(`fetchLogout`);
                 console.log("############################################################axios -> member/login redirect", error.response.data.error)
                 console.log("############################################################axios -> member/login redirect")
-                    return redirect(`/member/login`);
+                store.$toast.show(`권한이 없습니다.`, {
+                    theme: "toasted-primary",
+                    position: "bottom-center",
+                    duration : 2000
+                });
+                   // return redirect(`/`);
                   //  window.location = `/member/login`;
             } else if(error.response.data.error === `unauthorized`) {
                 store.$toast.show(`아이디 또는 비밀번호가 올바르지 않습니다.`, {
