@@ -76,7 +76,7 @@ export const actions = {
                 };
             }
 
-            const res = await this.$axios.get(`/boards`, { params: data });
+            const res = await this.$axios.get(`/api/boards`, { params: data });
 
             commit('loadBoards', {
                 mainBoardsResponse: res.data,
@@ -90,7 +90,7 @@ export const actions = {
     async getBoard({ commit, rootState }, payload) {
         try {
             this.$axios.defaults.headers['Content-Type'] = `application/json`;
-            const res = await this.$axios.get(`/boards/${payload}`);
+            const res = await this.$axios.get(`/api/boards/${payload}`);
 
             commit('loadBoard', {
                 mainBoardResponse: res.data
@@ -105,7 +105,7 @@ export const actions = {
 console.log(rootState.cookies[COOKIES.ACCESS_TOKEN]);
             this.$axios.defaults.headers.Authorization = `Bearer ${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
             this.$axios.defaults.headers['Content-Type'] = `application/json`;
-            await this.$axios.post(`/boards`, payload);
+            await this.$axios.post(`/api/boards`, payload);
        // } catch (error) {
           //  console.error("error.response >> saveBoard", error.response);
        // }
@@ -121,7 +121,7 @@ console.log(rootState.cookies[COOKIES.ACCESS_TOKEN]);
 
             this.$axios.defaults.headers.Authorization = `Bearer ${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
             this.$axios.defaults.headers['Content-Type'] = `application/json`;
-            const res = await this.$axios.patch(`/boards/${payload.boardNo}`, data);
+            const res = await this.$axios.patch(`/api/boards/${payload.boardNo}`, data);
 
         } catch (error) {
             console.error("error.response >> updateBoard", error.response);
@@ -133,7 +133,7 @@ console.log(rootState.cookies[COOKIES.ACCESS_TOKEN]);
 
             this.$axios.defaults.headers.Authorization = `Bearer ${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
             this.$axios.defaults.headers['Content-Type'] = `application/json`;
-            const res = await this.$axios.delete(`/boards/${payload.boardNo}`);
+            const res = await this.$axios.delete(`/api/boards/${payload.boardNo}`);
 
         } catch (error) {
             console.error("error.response >> updateBoard", error.response);
