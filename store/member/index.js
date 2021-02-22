@@ -40,7 +40,7 @@ export const actions = {
     async signIn({ commit, rootState }, payload) {
         try {
             this.$axios.defaults.headers.Authorization = `Basic ${AUTH.LOGIN_AUTHORIZATION_KEY}`;
-            const res = await this.$axios.post(`/oauth/token`, jsonToForm(payload));
+            const res = await this.$axios.post(`http://localhost:8083/oauth/token`, jsonToForm(payload));
             const { access_token } = res.data;
             console.log("access_token = " + access_token)
             commit('setCookie', {
