@@ -94,8 +94,8 @@ module.exports = {
     { src: '~/static/css/plugin-css/plugin.css', lang: 'css' },
 ],
   axios: {
-    browserBaseURL: process.env.NODE_ENV === 'production' ? 'http://localhost:8080' : 'http://localhost:8080',
-    baseURL: process.env.NODE_ENV === 'production' ? 'http://localhost:8080' : 'http://localhost:8080',
+    browserBaseURL: process.env.NODE_ENV === 'production' ? 'http://13.124.4.104' : 'http://13.124.4.104',
+    baseURL: process.env.NODE_ENV === 'production' ? 'http://13.124.4.104' : 'http://13.124.4.104',
     https: false,
   },
   toast: {
