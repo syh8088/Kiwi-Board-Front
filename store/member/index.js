@@ -40,7 +40,7 @@ export const actions = {
     async signIn({ commit, rootState }, payload) {
         try {
             this.$axios.defaults.headers.Authorization = `Basic ${AUTH.LOGIN_AUTHORIZATION_KEY}`;
-            const res = await this.$axios.post(`http://3.36.112.212:8083/oauth/token`, jsonToForm(payload));
+            const res = await this.$axios.post(`http://localhost:8083/oauth/token`, jsonToForm(payload));
             const { access_token } = res.data;
             console.log("access_token = " + access_token)
             commit('setCookie', {
@@ -53,6 +53,24 @@ export const actions = {
             return res;
         } catch (error) {
             console.error("signIn >> error", error);
+        }
+    },
+    async socialLogin({ commit, rootState }, payload) {
+        try {
+            this.$axios.defaults.headers.Authorization = `Basic ${AUTH.LOGIN_AUTHORIZATION_KEY}`;
+            const res = await this.$axios.get(`http://localhost:8083/oauth2/authorize/${payload.provider}?redirect_uri=${payload.redirectUri}&callback=login`);
+            const { access_token } = res.data;
+            console.log("access_token = " + access_token)
+            commit('setCookie', {
+                key: COOKIES.ACCESS_TOKEN,
+                value: access_token,
+                expires: 365,
+                secure: true
+            }, { root: true });
+
+            return res;
+        } catch (error) {
+            console.error("socialLogin >> error", error);
         }
     },
     async getMe({ commit, rootState }, payload) {

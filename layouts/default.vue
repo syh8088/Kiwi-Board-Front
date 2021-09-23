@@ -208,6 +208,7 @@
                     :modal="signInModel"
                     @onJobSearchModalSigninClick="onJobSearchModalSigninClick"
                     @signIn="signIn"
+                    @socialLogin="socialLogin"
             />
 
         </body>
@@ -279,6 +280,17 @@
                     await this.getMe();
                     this.signInFadeIn = false;
                 }
+            },
+            async socialLogin() {
+                console.log("111111")
+                const data = {
+                    redirectUri: 'http://localhost:3000',
+                    provider: 'kakao',
+                };
+                window.location = `http://localhost:8083/oauth2/authorize/${data.provider}?redirect_uri=${data.redirectUri}&callback=login`;
+
+                //const res = await this.$store.dispatch('member/socialLogin', data);
+                //console.log("res", res);
             },
             async getMe() {
                 const resMe = await this.$store.dispatch('member/getMe', { isAuthenticated: true });

@@ -57,16 +57,17 @@
                             </div>-->
                         </div>
                     </div>
-                    <!--<div class="careerfy-box-title careerfy-box-title-sub">
+                    <div class="careerfy-box-title careerfy-box-title-sub">
                         <span>Or Sign In With</span>
-                    </div>-->
+                    </div>
                     <div class="clearfix"></div>
-                    <!--<ul class="careerfy-login-media">
-                        <li><a href="javascript:void(0);"><i class="fa fa-facebook"></i> Sign In with Facebook</a></li>
+                    <ul class="careerfy-login-media">
+                        <li @click="socialLogin"><a href="javascript:void(0);"><i class="fa fa-kakao"></i> Sign In with KaKao</a></li>
+<!--                        <li><a href="javascript:void(0);"><i class="fa fa-facebook"></i> Sign In with Facebook</a></li>
                         <li><a href="javascript:void(0);" data-original-title="google"><i class="fa fa-google"></i> Sign In with Google</a></li>
                         <li><a href="javascript:void(0);" data-original-title="twitter"><i class="fa fa-twitter"></i> Sign In with Twitter</a></li>
-                        <li><a href="javascript:void(0);" data-original-title="linkedin"><i class="fa fa-linkedin"></i> Sign In with LinkedIn</a></li>
-                    </ul>-->
+                        <li><a href="javascript:void(0);" data-original-title="linkedin"><i class="fa fa-linkedin"></i> Sign In with LinkedIn</a></li>-->
+                    </ul>
                <!-- </form>-->
 
             </div>
@@ -116,6 +117,10 @@
             },
             signIn() {
                 this.$emit('signIn');
+            },
+            socialLogin() {
+                console.log("????")
+                this.$emit('socialLogin');
             }
         },
     }
