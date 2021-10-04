@@ -64,7 +64,7 @@ export const actions = {
         });
 
         const { access_token } = res.data;
-        console.log("access_token = " + access_token)
+
         commit('setCookie', {
             key: COOKIES.ACCESS_TOKEN,
             value: access_token,

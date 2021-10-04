@@ -290,7 +290,7 @@
                 }
             },
             async socialLogin() {
-                console.log("111111")
+
                 const data = {
                     redirectUri: 'http://localhost:3000',
                     provider: 'kakao',
@@ -301,16 +301,15 @@
                // console.log("res", res);
             },
             async socialLoginV2({ accessToken, refreshToken, expiresIn, provider }) {
-                console.log("111111")
-                console.log(accessToken);
-                console.log(provider);
 
-                const expiredAt = new Date(expiresIn);
-                console.log("expiredAt", expiredAt);
+                const now = new Date();
+                const expiryDate = new Date(now.getTime() + expiresIn * 1000);
+
+                console.log("expiryDate", expiryDate);
                 const res = await this.$store.dispatch('member/socialLoginV2', {
                     accessToken: accessToken,
                     refreshToken: refreshToken,
-                    expiredAt: expiredAt,
+                    expiredAt: expiryDate,
                     provider: provider
                 });
 
@@ -320,20 +319,6 @@
                     await this.getMe();
                     this.signInFadeIn = false;
                 }
-            },
-            getTimeStringSeconds(seconds) {
-
-                let hour, min, sec;
-
-                hour = parseInt(seconds/3600);
-                min = parseInt((seconds%3600)/60);
-                sec = seconds%60;
-
-                if (hour.toString().length==1) hour = "0" + hour;
-                if (min.toString().length==1) min = "0" + min;
-                if (sec.toString().length==1) sec = "0" + sec;
-
-               return hour + ":" + min + ":" + sec;
             },
             async getMe() {
                 const resMe = await this.$store.dispatch('member/getMe', { isAuthenticated: true });
