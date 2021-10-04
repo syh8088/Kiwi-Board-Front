@@ -206,9 +206,11 @@
             <sign-in
                     :sign-in-fade-in="signInFadeIn"
                     :modal="signInModel"
+                    :kakao-client-id="KAKAO_CLIENT_ID"
                     @onJobSearchModalSigninClick="onJobSearchModalSigninClick"
                     @signIn="signIn"
                     @socialLogin="socialLogin"
+                    @socialLoginV2="socialLoginV2"
             />
 
         </body>
@@ -216,6 +218,9 @@
 </template>
 
 <script>
+
+    import { AUTH } from '~/data/constant/auth/';
+    import { PROVIDER } from '~/data/constant/types/provider/provider';
     import SignUp from '~/components/member/SignUp';
     import SignIn from '~/components/member/SignIn';
     import {COOKIES} from '~/data/constant/keys';
@@ -224,7 +229,7 @@
     export default {
         components: {
             SignUp,
-            SignIn
+            SignIn,
         },
         created() {
         },
@@ -237,6 +242,9 @@
             },
             ME() {
                 return this.$store.state.cookies[COOKIES.ME] || '';
+            },
+            KAKAO_CLIENT_ID() {
+                return AUTH.KAKAO_CLIENT_ID.CLIENT_ID || '';
             },
         },
         data() {
@@ -252,7 +260,7 @@
                 signInModel: {
                     id: "",
                     password: ""
-                }
+                },
             };
         },
         methods: {
@@ -287,10 +295,45 @@
                     redirectUri: 'http://localhost:3000',
                     provider: 'kakao',
                 };
-                window.location = `http://localhost:8083/oauth2/authorize/${data.provider}?redirect_uri=${data.redirectUri}&callback=login`;
+                window.location = `http://localhost:8083/api/oauth/authorize/${data.provider}?redirectUri=${data.redirectUri}&callback=login`;
 
-                //const res = await this.$store.dispatch('member/socialLogin', data);
-                //console.log("res", res);
+               // const res = await this.$store.dispatch('member/socialLogin', data);
+               // console.log("res", res);
+            },
+            async socialLoginV2({ accessToken, refreshToken, expiresIn, provider }) {
+                console.log("111111")
+                console.log(accessToken);
+                console.log(provider);
+
+                const expiredAt = new Date(expiresIn);
+                console.log("expiredAt", expiredAt);
+                const res = await this.$store.dispatch('member/socialLoginV2', {
+                    accessToken: accessToken,
+                    refreshToken: refreshToken,
+                    expiredAt: expiredAt,
+                    provider: provider
+                });
+
+                console.log("res", res);
+
+                if (res && (res.status >= 200 && res.status <= 300)) {
+                    await this.getMe();
+                    this.signInFadeIn = false;
+                }
+            },
+            getTimeStringSeconds(seconds) {
+
+                let hour, min, sec;
+
+                hour = parseInt(seconds/3600);
+                min = parseInt((seconds%3600)/60);
+                sec = seconds%60;
+
+                if (hour.toString().length==1) hour = "0" + hour;
+                if (min.toString().length==1) min = "0" + min;
+                if (sec.toString().length==1) sec = "0" + sec;
+
+               return hour + ":" + min + ":" + sec;
             },
             async getMe() {
                 const resMe = await this.$store.dispatch('member/getMe', { isAuthenticated: true });

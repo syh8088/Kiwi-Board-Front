@@ -40,7 +40,7 @@ export const actions = {
     async signIn({ commit, rootState }, payload) {
         try {
             this.$axios.defaults.headers.Authorization = `Basic ${AUTH.LOGIN_AUTHORIZATION_KEY}`;
-            const res = await this.$axios.post(`http://localhost:8083/oauth/token`, jsonToForm(payload));
+            const res = await this.$axios.post(`http://localhost:8083/api/oauth/token`, jsonToForm(payload));
             const { access_token } = res.data;
             console.log("access_token = " + access_token)
             commit('setCookie', {
@@ -55,18 +55,47 @@ export const actions = {
             console.error("signIn >> error", error);
         }
     },
+    async socialLoginV2({ commit, rootState }, payload) {
+
+        const res = await this.$axios.post(`http://localhost:8083/api/oauth/authorize/${payload.provider.toLowerCase()}`, {
+            accessToken: payload.accessToken,
+            refreshToken: payload.refreshToken,
+            expiredAt: payload.expiredAt,
+        });
+
+        const { access_token } = res.data;
+        console.log("access_token = " + access_token)
+        commit('setCookie', {
+            key: COOKIES.ACCESS_TOKEN,
+            value: access_token,
+            expires: 365,
+            secure: true
+        }, { root: true });
+
+        console.log("res", res)
+        return res;
+    },
+
     async socialLogin({ commit, rootState }, payload) {
         try {
             this.$axios.defaults.headers.Authorization = `Basic ${AUTH.LOGIN_AUTHORIZATION_KEY}`;
-            const res = await this.$axios.get(`http://localhost:8083/oauth2/authorize/${payload.provider}?redirect_uri=${payload.redirectUri}&callback=login`);
-            const { access_token } = res.data;
-            console.log("access_token = " + access_token)
-            commit('setCookie', {
+            //const res = await this.$axios.get(`http://localhost:8083/api/oauth/authorize/${payload.provider}?redirectUri=${payload.redirectUri}&callback=login`);
+            const res = await this.$axios.get(`http://localhost:8083/api/oauth/authorize/${payload.provider}?redirectUri=${payload.redirectUri}&callback=login`);
+
+            //const { access_token } = res.data;
+            //console.log("access_token = " + access_token)
+
+            const { socialLoginPage } = res.data;
+            console.log("socialLoginPage = " + socialLoginPage)
+
+            const res2 = await this.$axios.get(socialLoginPage);
+            console.log("res2", res2);
+            /*commit('setCookie', {
                 key: COOKIES.ACCESS_TOKEN,
                 value: access_token,
                 expires: 365,
                 secure: true
-            }, { root: true });
+            }, { root: true });*/
 
             return res;
         } catch (error) {
@@ -75,8 +104,10 @@ export const actions = {
     },
     async getMe({ commit, rootState }, payload) {
         try {
-            this.$axios.defaults.headers.Authorization = `Bearer ${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
+            //this.$axios.defaults.headers.Authorization = `Bearer ${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
+            this.$axios.defaults.headers.accessToken = `${rootState.cookies[COOKIES.ACCESS_TOKEN]}`;
             const res = await this.$axios.get(`/api/members/me`);
+            console.log("getMe", res);
             commit('setCookie', {
                 key: COOKIES.ME,
                 value: res.data,
@@ -94,7 +125,6 @@ export const actions = {
 export const getters = {
 
     isAuthenticated(state, getters, rootState) {
-
         console.log("rootState.cookies[COOKIES.ME]", rootState.cookies)
         return !!(rootState.cookies[COOKIES.ME] && rootState.cookies[COOKIES.ME]);
     },

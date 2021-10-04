@@ -13,6 +13,10 @@ module.exports = {
     'nuxt-user-agent',
     ['nuxt-mq'],
   ],
+  proxy: {
+    //'/login/': { target: 'https://accounts.kakao.com', pathRewrite: {'^/login/': ''}, changeOrigin: true },
+    //'/authorize/': { target: 'https://kauth.kakao.com/oauth', pathRewrite: {'^/authorize/': ''}, changeOrigin: true }
+  },
   'mq': {
     defaultBreakpoint: 'default',
     breakpoints: {

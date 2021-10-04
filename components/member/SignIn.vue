@@ -62,7 +62,20 @@
                     </div>
                     <div class="clearfix"></div>
                     <ul class="careerfy-login-media">
-                        <li @click="socialLogin"><a href="javascript:void(0);"><i class="fa fa-kakao"></i> Sign In with KaKao</a></li>
+
+
+                        <li style="cursor: pointer;">
+                            <KakaoLogin
+                                    :api-key="kakaoClientId"
+                                    image="kakao_account_login_btn_large_wide"
+                                    :on-success="socialLoginV2"
+                                    :on-failure="onKaKaoFailure"
+                            />
+                        </li>
+
+                        <!--<li @click="socialLogin"><a href="javascript:void(0);"><i class="fa fa-kakao"></i> Sign In with KaKao</a></li>-->
+
+
 <!--                        <li><a href="javascript:void(0);"><i class="fa fa-facebook"></i> Sign In with Facebook</a></li>
                         <li><a href="javascript:void(0);" data-original-title="google"><i class="fa fa-google"></i> Sign In with Google</a></li>
                         <li><a href="javascript:void(0);" data-original-title="twitter"><i class="fa fa-twitter"></i> Sign In with Twitter</a></li>
@@ -76,7 +89,14 @@
 </template>
 
 <script>
+
+    import KakaoLogin from 'vue-kakao-login'
+    import { PROVIDER } from '~/data/constant/types/provider/provider';
+
     export default {
+        components: {
+            KakaoLogin,
+        },
         name: 'Sign-In',
         inject: ['$validator'],
         props: {
@@ -88,7 +108,10 @@
                 type: Object,
                 default: () => {}
             },
-
+            kakaoClientId: {
+                type: String,
+                default: () => ''
+            },
         },
         computed: {
             MODAL() {
@@ -119,9 +142,18 @@
                 this.$emit('signIn');
             },
             socialLogin() {
-                console.log("????")
                 this.$emit('socialLogin');
-            }
+            },
+            socialLoginV2(data) {
+                this.$emit('socialLoginV2', {
+                    accessToken: data.access_token,
+                    refreshToken: data.refresh_token,
+                    expiresIn: data.expires_in,
+                    provider: PROVIDER.KAKAO
+                });
+            },
+            onKaKaoFailure(data) {
+            },
         },
     }
 </script>
