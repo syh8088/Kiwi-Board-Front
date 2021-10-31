@@ -281,7 +281,7 @@
                 const data = {
                     username: this.signInModel.id,
                     password: this.signInModel.password,
-                    grant_type: 'password'
+                   // grant_type: 'password'
                 };
                 const res = await this.$store.dispatch('member/signIn', data);
                 if (res && (res.status >= 200 && res.status <= 300)) {
