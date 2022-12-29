@@ -73,6 +73,10 @@
                             />
                         </li>
 
+<!--                      <div style="cursor: pointer;" @click="onclickKaKaoLogin">-->
+<!--                        <img src="~/static/img/social/kakao_login_medium_narrow.png">-->
+<!--                      </div>-->
+
                         <!--<li @click="socialLogin"><a href="javascript:void(0);"><i class="fa fa-kakao"></i> Sign In with KaKao</a></li>-->
 
 
